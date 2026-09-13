@@ -12,7 +12,11 @@ cask "emacs-ns-inline" do
     regex(/emacs[._-]v?(\d+(?:\.\d+)+)_apple_nc\.pkg/i)
   end
 
-  conflicts_with cask: "emacs-app"
+  conflicts_with cask: [
+    "emacs-app",
+    "emacs-app@nightly",
+    "emacs-app@pretest",
+  ]
   depends_on arch: :arm64
   depends_on macos: :tahoe
 
@@ -29,5 +33,9 @@ cask "emacs-ns-inline" do
 
   uninstall pkgutil: "com.takaxp.emacs"
 
-  zap trash: "~/Library/Saved Application State/org.gnu.Emacs.savedState"
+  zap trash: [
+    "~/Library/Caches/org.gnu.Emacs",
+    "~/Library/Preferences/org.gnu.Emacs.plist",
+    "~/Library/Saved Application State/org.gnu.Emacs.savedState",
+  ]
 end
